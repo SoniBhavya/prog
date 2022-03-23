@@ -1,4 +1,5 @@
 from typing import Dict
+from charges_calc import charge_calc
 
 while True:
 
@@ -7,7 +8,7 @@ while True:
     def validate_vals(val, var_name):
         if var_name == "applied_load" or var_name == "dist_from_source":
             if val.isnumeric():
-                storage(val,var_name)
+                storage(int(val),var_name)
             else:
                 val = input("ReEnter load:\n")
                 validate_vals(val, var_name)
@@ -23,8 +24,8 @@ while True:
         return
 
     def storage(validated_var, key_name):
-            val_dict[key_name] = validated_var
-            print("stored values:", val_dict)
+        val_dict[key_name] = validated_var
+        print("stored values:", val_dict)
 
     applied_load = input("Enter Load:\n")
     validate_vals(applied_load, 'applied_load')
@@ -35,5 +36,6 @@ while True:
     dist_from_source = input("Enter distance:\n")
     validate_vals(dist_from_source,'dist_from_source')
 
+    charge_calc(val_dict["applied_load"], val_dict["dist_from_source"], val_dict["conn_cat"])
 
 
